@@ -163,18 +163,52 @@ body {
   font-size: 1rem;
 }
 .post-content h2 {
-  color: var(--accent-blue) !important;
-  font-size: 1.4rem;
+  color: #ffffff !important;
+  font-size: 1.3rem;
   font-weight: 700;
-  border-bottom: 2px solid #e0e7ff !important;
-  padding-bottom: 0.5rem;
   margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding: 0.6rem 1.2rem 0.6rem 1rem;
+  background: var(--gradient-main);
+  border-radius: 8px;
+  border: none !important;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(37,99,235,0.3);
+  letter-spacing: 0.01em;
 }
+/* H2の左のアイコン風マーク */
+.post-content h2::before {
+  content: '▍';
+  opacity: 0.7;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
 .post-content h3 {
   color: var(--accent-purple) !important;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 700;
   margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding: 0.45rem 1rem;
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+  border-left: 4px solid var(--accent-purple);
+  border-radius: 0 6px 6px 0;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.1);
+}
+
+.post-content h4 {
+  color: #0891b2 !important;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  padding: 0.35rem 0.75rem;
+  background: #f0f9ff;
+  border-left: 3px solid #0891b2;
+  border-radius: 0 4px 4px 0;
 }
 .post-content a {
   color: var(--accent-blue) !important;
