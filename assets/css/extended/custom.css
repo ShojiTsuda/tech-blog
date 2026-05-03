@@ -158,11 +158,10 @@ body {
   line-height: 1.7;
 }
 
-/* 投稿日・読了時間 */
+/* 投稿日・読了時間・文字数・著者を非表示 */
 .entry-footer,
 .post-meta {
-  color: #a8a29e !important;
-  font-size: 0.75rem;
+  display: none !important;
 }
 
 /* ========== 記事ページ ========== */
