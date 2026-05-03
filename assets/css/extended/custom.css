@@ -61,13 +61,16 @@ body {
 }
 
 /* ========== ホームページ ========== */
+/* ホームバナーの横幅を広げる */
 .home-info {
   background: linear-gradient(135deg, #fff7ed 0%, #fffbeb 100%);
   border: 1px solid #fed7aa;
   border-radius: 16px;
-  padding: 2rem;
+  padding: 0.75rem 1.5rem;
   position: relative;
   overflow: hidden;
+  max-width: 100% !important;
+  width: 100% !important;
 }
 .home-info::before {
   content: '';
@@ -80,7 +83,12 @@ body {
 }
 .home-info .entry-content p {
   color: #57534e !important;
-  line-height: 1.8;
+  line-height: 1.6;
+  margin: 0.25rem 0 0;
+}
+/* ホームページのコンテナ幅を広げる */
+.main:has(.home-info) {
+  max-width: 1100px !important;
 }
 
 /* ========== 記事カード ========== */
