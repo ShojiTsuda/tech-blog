@@ -71,10 +71,10 @@ body {
 
 /* ホームバナー */
 .home-info {
-  background: linear-gradient(135deg, #fff7ed 0%, #fffbeb 100%);
-  border: 1px solid #fed7aa;
-  border-radius: 16px;
-  padding: 1rem 1.5rem !important;
+  background: linear-gradient(135deg, #fff7ed 0%, #fffbeb 60%, #fef9c3 100%);
+  border: 1.5px solid #fdba74;
+  border-radius: 20px;
+  padding: 1.2rem 2rem !important;
   position: relative;
   overflow: hidden;
   max-width: 100% !important;
@@ -84,6 +84,17 @@ body {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
+  box-shadow: 0 4px 24px rgba(249,115,22,0.1), 0 1px 4px rgba(0,0,0,0.05);
+}
+/* 右上の装飾円 */
+.home-info::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 130px; height: 130px;
+  background: radial-gradient(circle, rgba(251,191,36,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
 }
 .home-info::before {
   content: '';
@@ -129,10 +140,10 @@ body {
 .post-entry {
   background: #ffffff !important;
   border: 1px solid #fed7aa !important;
-  border-radius: 12px !important;
-  padding: 0.65rem 1.2rem !important;
-  box-shadow: var(--card-shadow) !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+  border-radius: 16px !important;
+  padding: 1.2rem 1.5rem 1rem 1.5rem !important;
+  box-shadow: 0 2px 12px rgba(249,115,22,0.08), 0 1px 3px rgba(0,0,0,0.06) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
   position: relative;
   overflow: hidden;
   max-width: 860px !important;
@@ -140,50 +151,81 @@ body {
   margin-right: auto !important;
 }
 
-/* カードの左ボーダーライン */
+/* カード上部グラデーションライン（常時表示） */
 .post-entry::before {
   content: '';
   position: absolute;
-  top: 0; left: 0;
-  width: 4px;
-  height: 100%;
+  top: 0; left: 0; right: 0;
+  height: 3px;
   background: var(--gradient-main);
+  opacity: 0.35;
+  transition: opacity 0.25s ease;
+  border-radius: 16px 16px 0 0;
+}
+
+/* カード右下の装飾：矢印 */
+.post-entry::after {
+  content: '→';
+  position: absolute;
+  bottom: 0.9rem;
+  right: 1.2rem;
+  font-size: 0.95rem;
+  color: #fdba74;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transform: translateX(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .post-entry:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: var(--card-shadow-hover) !important;
-  border-color: #fdba74 !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 32px rgba(249,115,22,0.18), 0 2px 8px rgba(0,0,0,0.08) !important;
+  border-color: #fb923c !important;
 }
 .post-entry:hover::before {
   opacity: 1;
+}
+.post-entry:hover::after {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* 記事タイトル（カード内） */
 .post-entry h2 {
   color: #1c1917 !important;
-  font-weight: 700;
-  font-size: 1.35rem !important;
-  margin: 0 0 0.6rem !important;
-  line-height: 1.4 !important;
+  font-weight: 800 !important;
+  font-size: 1.15rem !important;
+  margin: 0 0 0.5rem !important;
+  line-height: 1.45 !important;
+  letter-spacing: -0.01em;
   transition: color 0.2s;
 }
 .post-entry:hover h2 {
   color: var(--accent-orange) !important;
 }
 
+/* タイトルと説明文の区切り線 */
+.post-entry h2::after {
+  content: '';
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--gradient-main);
+  border-radius: 2px;
+  margin-top: 0.45rem;
+  opacity: 0.6;
+}
+
 /* 記事の概要テキスト：1行に制限 */
 .post-entry .entry-content p {
   color: #78716c !important;
-  font-size: 0.82rem !important;
-  line-height: 1.5 !important;
+  font-size: 0.83rem !important;
+  line-height: 1.6 !important;
   margin: 0 !important;
   display: -webkit-box !important;
   -webkit-line-clamp: 1 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
+  padding-right: 1.8rem;
 }
 
 /* 投稿日・読了時間・文字数・著者を非表示 */
