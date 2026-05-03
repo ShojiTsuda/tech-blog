@@ -61,12 +61,12 @@ body {
 }
 
 /* ========== ホームページ ========== */
-/* ホームバナーの横幅を広げる */
+/* ホームバナー */
 .home-info {
   background: linear-gradient(135deg, #fff7ed 0%, #fffbeb 100%);
   border: 1px solid #fed7aa;
   border-radius: 16px;
-  padding: 0.75rem 1.5rem;
+  padding: 0.6rem 1.5rem 0.7rem 1.5rem;
   position: relative;
   overflow: hidden;
   max-width: 100% !important;
@@ -81,10 +81,27 @@ body {
   background: var(--gradient-main);
   border-radius: 4px 0 0 4px;
 }
+/* タイトルのmarginを除去 */
+.home-info .entry-header {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.home-info .entry-header h1,
+.home-info h1 {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 1.5rem !important;
+  line-height: 1.4 !important;
+}
+/* 説明文のmarginを最小化 */
+.home-info .entry-content {
+  margin: 0 !important;
+  padding: 0 !important;
+}
 .home-info .entry-content p {
   color: #57534e !important;
-  line-height: 1.6;
-  margin: 0.25rem 0 0;
+  line-height: 1.5;
+  margin: 0.2rem 0 0 !important;
 }
 /* ホームページのコンテナ幅を広げる */
 .main:has(.home-info) {
