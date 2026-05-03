@@ -165,8 +165,8 @@ body {
 .post-entry h2 {
   color: #1c1917 !important;
   font-weight: 700;
-  font-size: 1.2rem !important;
-  margin: 0 0 0.2rem !important;
+  font-size: 1.35rem !important;
+  margin: 0 0 0.6rem !important;
   line-height: 1.4 !important;
   transition: color 0.2s;
 }
