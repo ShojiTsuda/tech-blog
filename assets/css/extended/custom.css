@@ -130,11 +130,12 @@ body {
   background: #ffffff !important;
   border: 1px solid #fed7aa !important;
   border-radius: 12px !important;
-  padding: 1.5rem !important;
+  padding: 0.65rem 1.2rem !important;
   box-shadow: var(--card-shadow) !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
   position: relative;
   overflow: hidden;
+  max-width: 860px !important;
 }
 
 /* カードの左ボーダーライン */
@@ -150,7 +151,7 @@ body {
 }
 
 .post-entry:hover {
-  transform: translateY(-5px) !important;
+  transform: translateY(-3px) !important;
   box-shadow: var(--card-shadow-hover) !important;
   border-color: #fdba74 !important;
 }
@@ -162,17 +163,25 @@ body {
 .post-entry h2 {
   color: #1c1917 !important;
   font-weight: 700;
+  font-size: 1rem !important;
+  margin: 0 0 0.2rem !important;
+  line-height: 1.4 !important;
   transition: color 0.2s;
 }
 .post-entry:hover h2 {
   color: var(--accent-orange) !important;
 }
 
-/* 記事の概要テキスト */
-.entry-content p {
+/* 記事の概要テキスト：1行に制限 */
+.post-entry .entry-content p {
   color: #78716c !important;
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: 0.82rem !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
 }
 
 /* 投稿日・読了時間・文字数・著者を非表示 */
