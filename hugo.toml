@@ -21,7 +21,7 @@ paginate = 10
   DateFormat = "2006年1月2日"
 
   [params.homeInfoParams]
-    Title = "🌟 へぇ〜な話"
+    Title = "人生を豊かにする雑学"
     Content = "思わず誰かに話したくなる雑学・豆知識・ライフハックを紹介します。毎日ちょっと賢くなれる情報をお届け！"
 
 [[menus.main]]
