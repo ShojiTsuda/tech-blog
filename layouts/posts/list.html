@@ -2,9 +2,20 @@
 {{/* カテゴリー → 絵文字マッピング */}}
 {{- $emojiMap := dict "食" "🍽️" "生活" "🏠" "健康" "💪" "歴史・文化" "📜" "科学・自然" "🔬" "お金・経済" "💰" "雑学" "🎉" "ライフハック" "⚡" }}
 
-<header class="page-header" style="margin-bottom:1.5rem;">
+<header class="page-header" style="margin-bottom:1rem;">
   <h1 class="page-title">{{ .Title }}</h1>
 </header>
+
+{{/* 記事一覧の検索バー */}}
+<form class="list-search-form" action="/search/" method="get" onsubmit="return homeSearchSubmit(this)" style="margin-bottom:1.5rem;">
+  <div class="home-search-inner">
+    <span class="home-search-icon">🔍</span>
+    <input type="search" name="q" class="home-search-input"
+      placeholder="記事を検索..."
+      autocomplete="off" maxlength="64">
+    <button type="submit" class="home-search-btn">検索</button>
+  </div>
+</form>
 
 {{- if .Paginator.Pages }}
 <div class="post-list-compact">

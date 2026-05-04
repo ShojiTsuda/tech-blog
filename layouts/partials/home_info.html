@@ -1,0 +1,24 @@
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content md-content">
+        {{ $opts := dict "display" "block" }}
+        {{ .Content | $.Page.RenderString $opts }}
+    </div>
+    {{/* 検索バー */}}
+    <form class="home-search-form" action="/search/" method="get" onsubmit="return homeSearchSubmit(this)">
+        <div class="home-search-inner">
+            <span class="home-search-icon">🔍</span>
+            <input type="search" name="q" class="home-search-input"
+                placeholder="記事を検索... （例：睡眠、お金、歴史）"
+                autocomplete="off" maxlength="64">
+            <button type="submit" class="home-search-btn">検索</button>
+        </div>
+    </form>
+    <footer class="entry-footer">
+        {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+    </footer>
+</article>
+{{- end -}}

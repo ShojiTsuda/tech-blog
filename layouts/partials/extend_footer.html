@@ -1,0 +1,31 @@
+<script>
+/* ========== 検索バー連携JS ========== */
+
+/* ホームや記事一覧から検索ページへ遷移 */
+function homeSearchSubmit(form) {
+  var q = form.querySelector('input[type="search"]').value.trim();
+  if (q) {
+    window.location.href = '/search/?q=' + encodeURIComponent(q);
+  }
+  return false;
+}
+
+/* 検索ページ：URLの ?q= パラメータを読んで自動検索 */
+document.addEventListener('DOMContentLoaded', function () {
+  var searchInput = document.getElementById('searchInput');
+  if (!searchInput) return;
+
+  var params = new URLSearchParams(window.location.search);
+  var q = params.get('q');
+  if (q) {
+    searchInput.value = q;
+    /* PaperModのFuse.js検索をトリガー */
+    var event = new Event('input', { bubbles: true });
+    searchInput.dispatchEvent(event);
+    /* 少し遅延してもう一度（JS読み込みタイミング対策） */
+    setTimeout(function () {
+      searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+    }, 300);
+  }
+});
+</script>
