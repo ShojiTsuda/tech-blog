@@ -1,6 +1,6 @@
 baseURL = "https://tech-blog-djp.pages.dev"
 languageCode = "ja"
-title = "へぇ〜な話｜雑学・豆知識・ライフハック"
+title = "人生を豊かにする雑学 へぇ～な話｜雑学・豆知識・ライフハック"
 theme = "PaperMod"
 defaultContentLanguage = "ja"
 hasCJKLanguage = true
@@ -33,6 +33,12 @@ paginate = 30
     minMatchCharLength = 1
     limit = 12
     keys = ["title", "permalink", "summary", "content"]
+
+[[menus.main]]
+  identifier = "top"
+  name = "TOP"
+  url = "/"
+  weight = 0
 
 [[menus.main]]
   name = "記事一覧"

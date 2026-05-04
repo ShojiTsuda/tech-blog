@@ -51,13 +51,24 @@ body {
 }
 
 /* ナビゲーションリンク */
-.nav a {
+.nav a,
+.nav a.active {
   color: #78716c !important;
   font-weight: 500;
   transition: color 0.2s !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
 }
-.nav a:hover {
+.nav a:hover,
+.nav a.active:hover {
   color: var(--accent-orange) !important;
+  background: transparent !important;
+}
+/* 現在のページのメニュー項目はオレンジ文字のみ（ボタン化しない） */
+.nav a.active {
+  color: var(--accent-orange) !important;
+  font-weight: 700 !important;
 }
 
 /* ========== ホームページ ========== */
