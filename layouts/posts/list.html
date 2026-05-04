@@ -1,12 +1,11 @@
 {{- define "main" }}
-{{/* カテゴリー → 絵文字マッピング */}}
 {{- $emojiMap := dict "食" "🍽️" "生活" "🏠" "健康" "💪" "歴史・文化" "📜" "科学・自然" "🔬" "お金・経済" "💰" "雑学" "🎉" "ライフハック" "⚡" }}
 
 <header class="page-header" style="margin-bottom:1rem;">
   <h1 class="page-title">{{ .Title }}</h1>
 </header>
 
-{{/* 記事一覧の検索バー */}}
+{{/* 検索バー */}}
 <form class="list-search-form" action="/search/" method="get" onsubmit="return homeSearchSubmit(this)" style="margin-bottom:1.5rem;">
   <div class="home-search-inner">
     <span class="home-search-icon">🔍</span>
@@ -18,14 +17,65 @@
 </form>
 
 {{- if .Paginator.Pages }}
-<div class="post-list-compact">
+<div class="post-card-grid">
   {{- range .Paginator.Pages }}
+
+  {{/* YouTube Video ID を記事内容から抽出 */}}
+  {{- $ytID := "" }}
+  {{- $raw := .RawContent }}
+
+  {{/* パターン1: {{< youtube VIDEO_ID >}} ショートコード */}}
+  {{- $m1 := findRE `youtube\s+([a-zA-Z0-9_-]{11})` $raw 1 }}
+  {{- if $m1 }}
+    {{- $ytID = replaceRE `youtube\s+` "" (index $m1 0) }}
+    {{- $ytID = trim $ytID " \t\n\r>\"'" }}
+  {{- end }}
+
+  {{/* パターン2: youtube.com/watch?v=VIDEO_ID */}}
+  {{- if not $ytID }}
+    {{- $m2 := findRE `youtube\.com/watch\?v=[a-zA-Z0-9_-]{11}` $raw 1 }}
+    {{- if $m2 }}
+      {{- $ytID = replaceRE `.*youtube\.com/watch\?v=` "" (index $m2 0) }}
+      {{- $ytID = index (split $ytID "&") 0 }}
+    {{- end }}
+  {{- end }}
+
+  {{/* パターン3: youtube.com/embed/VIDEO_ID */}}
+  {{- if not $ytID }}
+    {{- $m3 := findRE `youtube\.com/embed/[a-zA-Z0-9_-]{11}` $raw 1 }}
+    {{- if $m3 }}
+      {{- $ytID = replaceRE `.*youtube\.com/embed/` "" (index $m3 0) }}
+      {{- $ytID = index (split $ytID "?") 0 }}
+    {{- end }}
+  {{- end }}
+
+  {{/* パターン4: youtu.be/VIDEO_ID */}}
+  {{- if not $ytID }}
+    {{- $m4 := findRE `youtu\.be/[a-zA-Z0-9_-]{11}` $raw 1 }}
+    {{- if $m4 }}
+      {{- $ytID = replaceRE `.*youtu\.be/` "" (index $m4 0) }}
+    {{- end }}
+  {{- end }}
+
   {{- $cat := index .Params.categories 0 | default "" }}
   {{- $emoji := index $emojiMap $cat | default "📝" }}
-  <a href="{{ .Permalink }}" class="post-list-item">
-    <span class="post-list-title">
-      <span class="post-list-emoji">{{ $emoji }}</span>{{ .Title }}
-    </span>
+
+  <a href="{{ .Permalink }}" class="post-card">
+    {{- if $ytID }}
+    <div class="post-card-thumb">
+      <img src="https://img.youtube.com/vi/{{ $ytID }}/hqdefault.jpg"
+           alt="{{ .Title }}" loading="lazy">
+      <span class="post-card-yt-badge">▶ YouTube</span>
+    </div>
+    {{- else }}
+    <div class="post-card-thumb post-card-thumb-noimg">
+      <span class="post-card-emoji">{{ $emoji }}</span>
+    </div>
+    {{- end }}
+    <div class="post-card-body">
+      <h2 class="post-card-title">{{ .Title }}</h2>
+      <p class="post-card-summary">{{ .Summary | plainify | htmlUnescape }}</p>
+    </div>
   </a>
   {{- end }}
 </div>
