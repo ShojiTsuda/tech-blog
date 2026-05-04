@@ -1,0 +1,28 @@
+{{- define "main" }}
+{{- $allTerms := .Data.Terms.Alphabetical }}
+{{- $order := slice "食" "生活" "健康" "歴史・文化" "科学・自然" "お金・経済" "雑学" "ライフハック" }}
+
+<div class="post-single">
+  <header class="post-header">
+    <h1 class="post-title">カテゴリー</h1>
+    <p style="color:#78716c; font-size:0.95rem; margin-top:0.3rem;">カテゴリーから記事を探す</p>
+  </header>
+
+  <div class="category-list">
+    {{- range $order }}
+      {{- $name := . }}
+      {{- range $allTerms }}
+        {{- if eq .Name $name }}
+        <a href="{{ .Page.Permalink }}" class="category-item">
+          <div class="category-item-left">
+            <span class="category-item-name">{{ .Name }}</span>
+            <span class="category-item-count">{{ .Count }} 記事</span>
+          </div>
+          <span class="category-item-arrow">→</span>
+        </a>
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  </div>
+</div>
+{{- end }}
