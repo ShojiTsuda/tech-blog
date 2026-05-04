@@ -1,6 +1,8 @@
 {{- define "main" }}
 {{- $allTerms := .Data.Terms.Alphabetical }}
 {{- $order := slice "食" "生活" "健康" "歴史・文化" "科学・自然" "お金・経済" "雑学" "ライフハック" }}
+{{/* カテゴリー → 絵文字マッピング */}}
+{{- $emojiMap := dict "食" "🍽️" "生活" "🏠" "健康" "💪" "歴史・文化" "📜" "科学・自然" "🔬" "お金・経済" "💰" "雑学" "🎉" "ライフハック" "⚡" }}
 
 <div class="post-single">
   <header class="post-header">
@@ -8,13 +10,16 @@
     <p style="color:#78716c; font-size:0.95rem; margin-top:0.3rem;">カテゴリーから記事を探す</p>
   </header>
 
+  {{- if $allTerms }}
   <div class="category-list">
     {{- range $order }}
       {{- $name := . }}
+      {{- $emoji := index $emojiMap $name | default "📝" }}
       {{- range $allTerms }}
         {{- if eq .Name $name }}
         <a href="{{ .Page.Permalink }}" class="category-item">
           <div class="category-item-left">
+            <span class="category-item-emoji">{{ $emoji }}</span>
             <span class="category-item-name">{{ .Name }}</span>
             <span class="category-item-count">{{ .Count }} 記事</span>
           </div>
@@ -24,5 +29,11 @@
       {{- end }}
     {{- end }}
   </div>
+  {{- else }}
+  <div class="empty-state">
+    <span class="empty-state-icon">📂</span>
+    <p>カテゴリーがまだありません</p>
+  </div>
+  {{- end }}
 </div>
 {{- end }}

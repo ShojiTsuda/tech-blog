@@ -276,7 +276,7 @@ body {
   box-shadow: 0 4px 15px rgba(249,115,22,0.35);
   letter-spacing: 0.01em;
 }
-/* H2の左のアイコン風マーク */
+/* H2の左のアイコン風マーク（CオプションのCSS末尾で上書き） */
 .post-content h2::before {
   content: '★';
   opacity: 0.85;
@@ -590,3 +590,125 @@ a[href*="/categories/"]:hover {
 .post-entry:nth-child(3) { animation-delay: 0.16s; }
 .post-entry:nth-child(4) { animation-delay: 0.24s; }
 .post-entry:nth-child(5) { animation-delay: 0.32s; }
+
+/* ========== B: ホームバナー 大型絵文字装飾 ========== */
+/* 右上に半透明の大きな本の絵文字を装飾として表示 */
+.home-info::after {
+  content: '📚';
+  position: absolute;
+  top: 50%;
+  right: 1.8rem;
+  transform: translateY(-50%);
+  font-size: 4rem;
+  opacity: 0.18;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* ========== C: 記事見出し装飾（強化版） ========== */
+/* H2 アイコンをより楽しく */
+.post-content h2::before {
+  content: '📌';
+  opacity: 1;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+/* H3 左装飾マーク */
+.post-content h3::before {
+  content: '▶ ';
+  color: var(--accent-amber);
+  font-size: 0.75em;
+  font-style: normal;
+}
+
+/* ========== D: ショートコードブロック ========== */
+/* 💡ポイント */
+.shortcode-point {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1.5px solid #fcd34d;
+  border-left: 5px solid #f59e0b;
+  border-radius: 0 12px 12px 0;
+  padding: 1rem 1.4rem 1rem 1.6rem;
+  margin: 1.5rem 0;
+  position: relative;
+}
+.shortcode-point-label {
+  display: block;
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: #92400e;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+.shortcode-point p { margin: 0 !important; color: #44403c; font-size: 0.95rem; }
+
+/* ⚠️注意 */
+.shortcode-warning {
+  background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+  border: 1.5px solid #fca5a5;
+  border-left: 5px solid #ef4444;
+  border-radius: 0 12px 12px 0;
+  padding: 1rem 1.4rem 1rem 1.6rem;
+  margin: 1.5rem 0;
+}
+.shortcode-warning-label {
+  display: block;
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: #991b1b;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+.shortcode-warning p { margin: 0 !important; color: #44403c; font-size: 0.95rem; }
+
+/* ✨まとめ */
+.shortcode-summary {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 1.5px solid #86efac;
+  border-left: 5px solid #22c55e;
+  border-radius: 0 12px 12px 0;
+  padding: 1rem 1.4rem 1rem 1.6rem;
+  margin: 1.5rem 0;
+}
+.shortcode-summary-label {
+  display: block;
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: #14532d;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+.shortcode-summary p { margin: 0 !important; color: #44403c; font-size: 0.95rem; }
+
+/* ========== E: 空状態イラスト ========== */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #a8a29e;
+}
+.empty-state-icon {
+  display: block;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+.empty-state p {
+  font-size: 1rem;
+  margin: 0;
+  color: #a8a29e;
+}
+
+/* ========== A: カテゴリー絵文字（記事一覧・カテゴリーページ） ========== */
+/* 記事一覧の絵文字アイコン */
+.post-list-emoji {
+  margin-right: 0.45rem;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+/* カテゴリーページの絵文字 */
+.category-item-emoji {
+  font-size: 1.8rem;
+  margin-right: 0.9rem;
+  flex-shrink: 0;
+  line-height: 1;
+}

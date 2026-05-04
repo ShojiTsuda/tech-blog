@@ -1,17 +1,30 @@
 {{- define "main" }}
+{{/* カテゴリー → 絵文字マッピング */}}
+{{- $emojiMap := dict "食" "🍽️" "生活" "🏠" "健康" "💪" "歴史・文化" "📜" "科学・自然" "🔬" "お金・経済" "💰" "雑学" "🎉" "ライフハック" "⚡" }}
 
 <header class="page-header" style="margin-bottom:1.5rem;">
   <h1 class="page-title">{{ .Title }}</h1>
 </header>
 
+{{- if .Paginator.Pages }}
 <div class="post-list-compact">
   {{- range .Paginator.Pages }}
+  {{- $cat := index .Params.categories 0 | default "" }}
+  {{- $emoji := index $emojiMap $cat | default "📝" }}
   <a href="{{ .Permalink }}" class="post-list-item">
-    <span class="post-list-title">{{ .Title }}</span>
+    <span class="post-list-title">
+      <span class="post-list-emoji">{{ $emoji }}</span>{{ .Title }}
+    </span>
     <span class="post-list-date">{{ .Date.Format "2006.01.02" }}</span>
   </a>
   {{- end }}
 </div>
+{{- else }}
+<div class="empty-state">
+  <span class="empty-state-icon">📭</span>
+  <p>まだ記事がありません</p>
+</div>
+{{- end }}
 
 {{- if gt .Paginator.TotalPages 1 }}
 <nav class="pagination" style="margin-top:2rem;">
