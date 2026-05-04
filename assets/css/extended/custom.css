@@ -46,8 +46,9 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-weight: 800;
-  font-size: 1.3rem !important;
+  font-size: 1.7rem !important;
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 /* ナビゲーションリンク */
@@ -381,9 +382,10 @@ a.tag:hover {
   transform: translateY(-1px);
 }
 
-/* カテゴリーバッジ（記事カード・記事ページ） */
+/* カテゴリーバッジ（記事カード・記事ページ限定 ※ナビは除外） */
 .post-categories a,
-a[href*="/categories/"] {
+.entry-footer a[href*="/categories/"],
+.post-content a[href*="/categories/"] {
   background: var(--gradient-main) !important;
   color: #ffffff !important;
   border: none !important;
@@ -398,7 +400,8 @@ a[href*="/categories/"] {
   display: inline-block;
 }
 .post-categories a:hover,
-a[href*="/categories/"]:hover {
+.entry-footer a[href*="/categories/"]:hover,
+.post-content a[href*="/categories/"]:hover {
   opacity: 0.85;
   transform: translateY(-1px);
 }
