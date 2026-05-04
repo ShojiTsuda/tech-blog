@@ -1,0 +1,22 @@
+{{- $p := . }}
+{{- if gt $p.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination pagination-numbered">
+    {{- if $p.HasPrev }}
+    <a class="page-link prev" href="{{ $p.Prev.URL }}">← 前へ</a>
+    {{- end }}
+
+    {{- range $p.Pagers }}
+      {{- if eq .PageNumber $p.PageNumber }}
+      <span class="page-link page-link-current">{{ .PageNumber }}</span>
+      {{- else }}
+      <a class="page-link" href="{{ .URL }}">{{ .PageNumber }}</a>
+      {{- end }}
+    {{- end }}
+
+    {{- if $p.HasNext }}
+    <a class="page-link next" href="{{ $p.Next.URL }}">次へ →</a>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}

@@ -36,18 +36,6 @@
 </div>
 {{- end }}
 
-{{- if gt .Paginator.TotalPages 1 }}
-<nav class="pagination" style="margin-top:2rem;">
-  {{- if .Paginator.HasPrev }}
-  <a href="{{ .Paginator.Prev.URL }}" class="page-link">← 前へ</a>
-  {{- end }}
-  <span style="color:#a8a29e; font-size:0.85rem;">
-    {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }} ページ
-  </span>
-  {{- if .Paginator.HasNext }}
-  <a href="{{ .Paginator.Next.URL }}" class="page-link">次へ →</a>
-  {{- end }}
-</nav>
-{{- end }}
+{{ partial "paginator_numbered.html" .Paginator }}
 
 {{- end }}
