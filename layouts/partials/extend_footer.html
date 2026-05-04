@@ -10,22 +10,27 @@ function homeSearchSubmit(form) {
   return false;
 }
 
-/* 検索ページ：URLの ?q= パラメータを読んで自動検索 */
-document.addEventListener('DOMContentLoaded', function () {
-  var searchInput = document.getElementById('searchInput');
-  if (!searchInput) return;
+/* 検索ページ：URLの ?q= パラメータを読んで自動検索
+   fastsearch.js は onkeyup + 非同期XHR で動くため
+   window.load 後に複数回 keyup をトリガーして確実に実行 */
+(function () {
+  if (!document.getElementById('searchInput')) return;
 
   var params = new URLSearchParams(window.location.search);
   var q = params.get('q');
-  if (q) {
-    searchInput.value = q;
-    /* PaperModのFuse.js検索をトリガー */
-    var event = new Event('input', { bubbles: true });
-    searchInput.dispatchEvent(event);
-    /* 少し遅延してもう一度（JS読み込みタイミング対策） */
-    setTimeout(function () {
-      searchInput.dispatchEvent(new Event('input', { bubbles: true }));
-    }, 300);
-  }
-});
+  if (!q) return;
+
+  var input = document.getElementById('searchInput');
+  input.value = q;
+
+  /* window.onload 後 + Fuse.js のXHR完了を待つため段階的に実行 */
+  window.addEventListener('load', function () {
+    [400, 800, 1400].forEach(function (delay) {
+      setTimeout(function () {
+        var ev = new KeyboardEvent('keyup', { bubbles: true, cancelable: true });
+        input.dispatchEvent(ev);
+      }, delay);
+    });
+  });
+})();
 </script>
