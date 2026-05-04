@@ -35,11 +35,13 @@ paginate = 30
   weight = 2
 
 [[menus.main]]
+  identifier = "tag-zatsugaku"
   name = "雑学・豆知識"
   url = "/tags/雑学/"
   weight = 3
 
 [[menus.main]]
+  identifier = "tag-lifehack"
   name = "ライフハック"
   url = "/tags/ライフハック/"
   weight = 4
