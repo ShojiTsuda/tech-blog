@@ -4,7 +4,7 @@ title = "へぇ〜な話｜雑学・豆知識・ライフハック"
 theme = "PaperMod"
 defaultContentLanguage = "ja"
 hasCJKLanguage = true
-paginate = 10
+paginate = 30
 
 [params]
   description = "思わず誰かに話したくなる雑学・豆知識・ライフハックを毎日お届け！"

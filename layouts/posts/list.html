@@ -1,0 +1,30 @@
+{{- define "main" }}
+
+<header class="page-header" style="margin-bottom:1.5rem;">
+  <h1 class="page-title">{{ .Title }}</h1>
+</header>
+
+<div class="post-list-compact">
+  {{- range .Paginator.Pages }}
+  <a href="{{ .Permalink }}" class="post-list-item">
+    <span class="post-list-title">{{ .Title }}</span>
+    <span class="post-list-date">{{ .Date.Format "2006.01.02" }}</span>
+  </a>
+  {{- end }}
+</div>
+
+{{- if gt .Paginator.TotalPages 1 }}
+<nav class="pagination" style="margin-top:2rem;">
+  {{- if .Paginator.HasPrev }}
+  <a href="{{ .Paginator.Prev.URL }}" class="page-link">← 前へ</a>
+  {{- end }}
+  <span style="color:#a8a29e; font-size:0.85rem;">
+    {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }} ページ
+  </span>
+  {{- if .Paginator.HasNext }}
+  <a href="{{ .Paginator.Next.URL }}" class="page-link">次へ →</a>
+  {{- end }}
+</nav>
+{{- end }}
+
+{{- end }}

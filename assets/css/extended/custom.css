@@ -450,6 +450,56 @@ a[href*="/categories/"]:hover {
   margin-top: 4rem;
 }
 
+/* ========== 記事一覧ページ（コンパクト） ========== */
+.post-list-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1.5px solid #fed7aa;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(249,115,22,0.08);
+}
+
+.post-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.4rem;
+  text-decoration: none !important;
+  border-bottom: 1px solid #fef3c7;
+  transition: background 0.15s ease;
+  gap: 1rem;
+}
+.post-list-item:last-child {
+  border-bottom: none;
+}
+.post-list-item:hover {
+  background: #fff7ed;
+}
+
+.post-list-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1c1917;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+.post-list-item:hover .post-list-title {
+  color: var(--accent-orange);
+}
+
+.post-list-date {
+  font-size: 0.75rem;
+  color: #a8a29e;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* ========== カテゴリー一覧ページ ========== */
 .category-list {
   display: flex;
