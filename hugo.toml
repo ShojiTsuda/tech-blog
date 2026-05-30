@@ -5,6 +5,7 @@ theme = "PaperMod"
 defaultContentLanguage = "ja"
 hasCJKLanguage = true
 paginate = 10
+enableRobotsTXT = false
 
 [params]
   description = "思わず誰かに話したくなる雑学・豆知識・ライフハックを毎日お届け！"
@@ -19,6 +20,16 @@ paginate = 10
   ShowWordCount = true
   ShowToc = true
   DateFormat = "2006年1月2日"
+
+  [params.assets]
+    favicon = "/favicon.svg"
+    favicon16x16 = "/favicon.svg"
+    favicon32x32 = "/favicon.svg"
+    apple_touch_icon = "/favicon.svg"
+    safari_pinned_tab = "/favicon.svg"
+
+  [params.schema]
+    publisherType = "Organization"
 
   [params.homeInfoParams]
     Title = "人生を豊かにする雑学"
