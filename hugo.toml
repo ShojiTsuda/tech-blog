@@ -5,85 +5,93 @@ theme = "PaperMod"
 defaultContentLanguage = "ja"
 hasCJKLanguage = true
 paginate = 10
-enableRobotsTXT = false
+enableRobotsTXT = true
 
 [params]
-  description = "思わず誰かに話したくなる雑学・豆知識・ライフハックを毎日お届け！"
-  author = "管理人"
-  defaultTheme = "light"
-  disableThemeToggle = false
-  ShowReadingTime = true
-  ShowShareButtons = false
-  ShowPostNavLinks = true
-  ShowBreadCrumbs = true
-  ShowCodeCopyButtons = true
-  ShowWordCount = true
-  ShowToc = true
-  DateFormat = "2006年1月2日"
+description = "思わず誰かに話したくなる雑学・豆知識・ライフハックを毎日お届け！"
+author = "管理人"
+defaultTheme = "light"
+disableThemeToggle = false
+ShowReadingTime = true
+ShowShareButtons = false
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowWordCount = true
+ShowToc = true
+DateFormat = "2006年1月2日"
 
-  [params.assets]
-    favicon = "/favicon.svg"
-    favicon16x16 = "/favicon.svg"
-    favicon32x32 = "/favicon.svg"
-    apple_touch_icon = "/favicon.svg"
-    safari_pinned_tab = "/favicon.svg"
+[params.assets]
+favicon = "/favicon.svg"
+favicon16x16 = "/favicon.svg"
+favicon32x32 = "/favicon.svg"
+apple_touch_icon = "/favicon.svg"
+safari_pinned_tab = "/favicon.svg"
 
-  [params.schema]
-    publisherType = "Organization"
+[params.schema]
+publisherType = "Organization"
 
-  [params.homeInfoParams]
-    Title = "人生を豊かにする雑学"
-    Content = "思わず誰かに話したくなる雑学・豆知識・ライフハックを紹介します。毎日ちょっと賢くなれる情報をお届け！"
+[params.homeInfoParams]
+Title = "人生を豊かにする雑学"
+Content = "思わず誰かに話したくなる雑学・豆知識・ライフハックを紹介します。毎日ちょっと賢くなれる情報をお届け！"
 
-  [params.fuseOpts]
-    isCaseSensitive = false
-    shouldSort = true
-    location = 0
-    distance = 1000
-    threshold = 0.4
-    minMatchCharLength = 1
-    limit = 12
-    keys = ["title", "permalink", "summary", "content"]
-
-[[menus.main]]
-  identifier = "top"
-  name = "TOP"
-  url = "/"
-  weight = 1
+[params.fuseOpts]
+isCaseSensitive = false
+shouldSort = true
+location = 0
+distance = 1000
+threshold = 0.4
+minMatchCharLength = 1
+limit = 12
+keys = ["title", "permalink", "summary", "content"]
 
 [[menus.main]]
-  name = "記事一覧"
-  url = "/posts/"
-  weight = 2
+identifier = "top"
+name = "TOP"
+url = "/"
+weight = 1
 
 [[menus.main]]
-  name = "カテゴリー"
-  url = "/categories/"
-  weight = 3
+name = "記事一覧"
+url = "/posts/"
+weight = 2
 
 [[menus.main]]
-  identifier = "tag-zatsugaku"
-  name = "雑学・豆知識"
-  url = "/tags/雑学/"
-  weight = 4
+name = "カテゴリー"
+url = "/categories/"
+weight = 3
 
 [[menus.main]]
-  identifier = "tag-lifehack"
-  name = "ライフハック"
-  url = "/tags/ライフハック/"
-  weight = 5
+identifier = "tag-zatsugaku"
+name = "雑学・豆知識"
+url = "/tags/雑学/"
+weight = 4
+
+[[menus.main]]
+identifier = "tag-lifehack"
+name = "ライフハック"
+url = "/tags/ライフハック/"
+weight = 5
 
 [taxonomies]
-  category = "categories"
-  tag = "tags"
+category = "categories"
+tag = "tags"
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+home = ["HTML", "RSS", "JSON"]
+section = ["HTML", "RSS"]
+taxonomy = ["HTML", "RSS"]
+term = ["HTML", "RSS"]
+
+[sitemap]
+changefreq = "weekly"
+priority = 0.5
+filename = "sitemap.xml"
 
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-  [markup.highlight]
-    style = "monokai"
-    lineNos = false
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+[markup.highlight]
+style = "monokai"
+lineNos = false
