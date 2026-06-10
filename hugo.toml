@@ -1,6 +1,6 @@
-baseURL = "https://tech-blog-djp.pages.dev"
+baseURL = "https://choco-zatsugaku.com"
 languageCode = "ja"
-title = "人生を豊かにする雑学 へぇ～な話｜雑学・豆知識・ライフハック"
+title = "ちょこっといい雑学 人生が豊かになる雑学集・ライフハック"
 theme = "PaperMod"
 defaultContentLanguage = "ja"
 hasCJKLanguage = true
