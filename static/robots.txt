@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tech-blog-djp.pages.dev/sitemap.xml
+Sitemap: https://choco-zatsugaku.com/sitemap.xml
