@@ -10,6 +10,8 @@ enableRobotsTXT = true
 [params]
 description = "思わず誰かに話したくなる雑学・豆知識・ライフハックを毎日お届け！"
 author = "管理人"
+# SNSシェア時の共通デフォルト画像（画像なし記事・トップ・新記事に自動適用）
+images = ["/images/og-default.png"]
 defaultTheme = "light"
 disableThemeToggle = false
 ShowReadingTime = true
