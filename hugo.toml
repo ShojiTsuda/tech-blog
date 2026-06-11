@@ -29,6 +29,8 @@ favicon16x16 = "/favicon.svg"
 favicon32x32 = "/favicon.svg"
 apple_touch_icon = "/favicon.svg"
 safari_pinned_tab = "/favicon.svg"
+# 構造化データ（JSON-LD）の発行元ロゴ用画像（タブのfaviconとは別）
+logo = "/images/logo.png"
 
 [params.schema]
 publisherType = "Organization"
