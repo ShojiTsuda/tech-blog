@@ -1,0 +1,136 @@
+{{- define "main" }}
+
+<article class="post-single">
+  <header class="post-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="post-title entry-hint-parent">
+      {{ .Title }}
+      {{- if .Draft }}
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+      {{- end }}
+    </h1>
+    {{- if .Description }}
+    <div class="post-description">
+      {{ .Description }}
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <div class="post-meta">
+      {{- partial "post_meta.html" . -}}
+      {{- partial "translation_list.html" . -}}
+      {{- partial "edit_post.html" . -}}
+      {{- partial "post_canonical.html" . -}}
+    </div>
+    {{- end }}
+  </header>
+  {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
+  {{- if (.Param "ShowToc") }}
+  {{- partial "toc.html" . }}
+  {{- end }}
+
+  {{- if .Content }}
+  <div class="post-content md-content">
+    {{- if not (.Param "disableAnchoredHeadings") }}
+    {{- partial "anchored_headings.html" .Content -}}
+    {{- else }}{{ .Content }}{{ end }}
+  </div>
+  {{- end }}
+
+  <footer class="post-footer">
+    {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
+    <ul class="post-tags">
+      {{- range ($.GetTerms $tags) }}
+      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- if (.Param "ShowPostNavLinks") }}
+    {{- partial "post_nav_links.html" . }}
+    {{- end }}
+    {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
+    {{- partial "share_icons.html" . -}}
+    {{- end }}
+  </footer>
+
+  {{/* ========== 関連記事（内部リンク強化でSEO改善） ========== */}}
+  {{/* タグ・カテゴリーの一致度で関連記事を自動抽出。タイトルのみ・最大10件を表示 */}}
+  {{- $related := first 12 (site.RegularPages.Related . ) -}}
+  {{- with $related }}
+  <div class="related-posts">
+    <h2 class="related-posts-title">📚 関連記事</h2>
+    <div class="related-posts-grid">
+      {{- range . }}
+      <a class="related-card" href="{{ .Permalink }}">
+        <span class="related-card-title">{{ .Title }}</span>
+      </a>
+      {{- end }}
+    </div>
+  </div>
+  {{- end }}
+
+  {{- if (.Param "comments") }}
+  {{- partial "comments.html" . }}
+  {{- end }}
+</article>
+
+<style>
+  /* 関連記事セクションのスタイル */
+  /* オレンジ系アクセントカラー */
+  .related-posts {
+    --accent-orange: #ed8936;
+    --accent-orange-soft: #fff4e8;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 3px solid var(--accent-orange);
+  }
+  .related-posts-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+    padding-left: 12px;
+    color: var(--accent-orange);
+    border-left: 5px solid var(--accent-orange);
+  }
+  .related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* PCは3列固定（12件＝3列×4行できれいに揃う） */
+    gap: 12px;
+  }
+  /* スマホは1列 */
+  @media (max-width: 640px) {
+    .related-posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .related-card {
+    display: flex;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    background: var(--entry);
+    border-left: 4px solid var(--accent-orange);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+  .related-card:hover {
+    transform: translateY(-3px);
+    background: var(--accent-orange-soft);
+    box-shadow: 0 6px 16px rgba(237, 137, 54, 0.25);
+  }
+  .related-card-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--primary);
+    line-height: 1.5;
+    transition: color 0.18s ease;
+  }
+  /* ホバー時はタイトルもオレンジに */
+  .related-card:hover .related-card-title {
+    color: var(--accent-orange);
+  }
+</style>
+
+{{- end }}{{/* end main */}}

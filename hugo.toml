@@ -92,6 +92,25 @@ changefreq = "weekly"
 priority = 0.5
 filename = "sitemap.xml"
 
+# 関連記事（Related Posts）の判定設定
+# タグ・カテゴリーの一致度で関連記事を自動抽出 → 内部リンク強化でSEO改善
+[related]
+includeNewer = true
+threshold = 80
+toLower = true
+
+  [[related.indices]]
+  name = "tags"
+  weight = 100
+
+  [[related.indices]]
+  name = "categories"
+  weight = 80
+
+  [[related.indices]]
+  name = "date"
+  weight = 10
+
 [markup]
 [markup.goldmark]
 [markup.goldmark.renderer]
