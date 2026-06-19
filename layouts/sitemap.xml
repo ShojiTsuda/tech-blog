@@ -1,6 +1,8 @@
 {{ printf "<?xml version=\"1.0\" encoding=\"utf-8\"?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       {{- range .Data.Pages }}
+      {{- /* タグの一覧・個別ページ（/tags/...）はサイトマップから除外。カテゴリー・記事は残す */ -}}
+      {{- if not (and (or (eq .Kind "term") (eq .Kind "taxonomy")) (eq .Data.Plural "tags")) }}
       <url>
               <loc>{{ .Permalink }}</loc>
               {{- if not .Lastmod.IsZero }}
@@ -13,5 +15,6 @@
               <priority>{{ .Sitemap.Priority }}</priority>
               {{- end }}
       </url>
+      {{- end }}
       {{- end }}
 </urlset>

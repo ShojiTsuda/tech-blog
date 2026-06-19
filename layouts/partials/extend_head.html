@@ -1,2 +1,8 @@
 <meta name="google-site-verification" content="oyxOnXZ_idjUxMhMFHMPdVI8UcSjpT1mWxpYGlXCzyc" />
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+{{- /* タグの一覧ページ・個別ページ（/tags/...）はnoindexにする。
+       薄い自動生成ページを検索対象から外し、記事のインデックスを促進するため。
+       カテゴリー・記事・トップは対象外（indexのまま）。follow指定でリンクは辿らせる */ -}}
+{{- if and (or (eq .Kind "term") (eq .Kind "taxonomy")) (eq .Data.Plural "tags") }}
+<meta name="robots" content="noindex, follow" />
+{{- end }}
