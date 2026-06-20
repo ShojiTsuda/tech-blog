@@ -36,8 +36,8 @@ logo = "/images/logo.png"
 publisherType = "Organization"
 
 [params.homeInfoParams]
-Title = "人生を豊かにする雑学"
-Content = "思わず誰かに話したくなる雑学・豆知識・ライフハックを紹介します。毎日ちょっと賢くなれる情報をお届け！"
+Title = "ちょこっといい雑学 人生が豊かになる雑学集・ライフハック"
+Content = "思わず誰かに話したくなる雑学・豆知識・ライフハックを毎日お届け。毎日ちょっと賢くなれる、人生が豊かになる雑学集です。"
 
 [params.fuseOpts]
 isCaseSensitive = false
