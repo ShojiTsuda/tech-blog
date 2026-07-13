@@ -42,6 +42,40 @@
   </div>
   {{- end }}
 
+  {{/* ========== YouTubeチャンネル送客CTA（全記事共通・YouTube収益への導線） ========== */}}
+  {{/* 記事本文からYouTube動画IDを自動抽出。動画があれば「動画を見る」ボタンを追加表示し、全記事に登録ボタンを出す */}}
+  {{- $ytID := "" }}
+  {{- $raw := .RawContent }}
+  {{/* ショートコード {{< youtube VIDEO_ID >}} 形式 */}}
+  {{- $m1 := findRE `youtube\s+([a-zA-Z0-9_-]{11})` $raw 1 }}
+  {{- if $m1 }}
+    {{- $ytID = replaceRE `youtube\s+` "" (index $m1 0) }}
+    {{- $ytID = trim $ytID " \t\n\r>\"'" }}
+  {{- end }}
+  {{/* youtube.com/watch?v= 形式のフォールバック */}}
+  {{- if not $ytID }}
+    {{- $m2 := findRE `youtube\.com/watch\?v=[a-zA-Z0-9_-]{11}` $raw 1 }}
+    {{- if $m2 }}
+      {{- $ytID = replaceRE `.*youtube\.com/watch\?v=` "" (index $m2 0) }}
+      {{- $ytID = index (split $ytID "&") 0 }}
+    {{- end }}
+  {{- end }}
+  {{- $channelSubURL := "https://www.youtube.com/channel/UCYWCN7cGlFIm78PxxoEk-ig?sub_confirmation=1" }}
+  <div class="yt-cta">
+    {{- if $ytID }}
+    <p class="yt-cta-lead">▶ この記事の内容は動画でも楽しめます</p>
+    {{- else }}
+    <p class="yt-cta-lead">🎬 YouTube「ちょこっといい雑学」も配信中</p>
+    {{- end }}
+    <div class="yt-cta-btns">
+      {{- if $ytID }}
+      <a class="yt-cta-btn yt-cta-watch" href="https://www.youtube.com/watch?v={{ $ytID }}" target="_blank" rel="noopener">▶ 動画を見る</a>
+      {{- end }}
+      <a class="yt-cta-btn yt-cta-sub" href="{{ $channelSubURL }}" target="_blank" rel="noopener">🔔 チャンネル登録</a>
+    </div>
+    <p class="yt-cta-note">毎日役立つ雑学＆ライフハックを配信中！登録して見逃さないでね</p>
+  </div>
+
   <footer class="post-footer">
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
     <ul class="post-tags">
@@ -130,6 +164,59 @@
   /* ホバー時はタイトルもオレンジに */
   .related-card:hover .related-card-title {
     color: var(--accent-orange);
+  }
+
+  /* ========== YouTubeチャンネル送客CTA ========== */
+  .yt-cta {
+    margin-top: 32px;
+    padding: 24px 20px;
+    border-radius: var(--radius);
+    text-align: center;
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+    border: 2px solid #ff0000;
+  }
+  .yt-cta-lead {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: #cc0000;
+  }
+  .yt-cta-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .yt-cta-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  }
+  /* 「動画を見る」＝白地に赤枠 */
+  .yt-cta-watch {
+    background: #fff;
+    color: #cc0000;
+    border: 2px solid #ff0000;
+  }
+  /* 「チャンネル登録」＝YouTube赤の塗り（主役ボタン） */
+  .yt-cta-sub {
+    background: #ff0000;
+    color: #fff !important;
+    border: 2px solid #ff0000;
+  }
+  .yt-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 0, 0, 0.3);
+    opacity: 0.92;
+  }
+  .yt-cta-note {
+    font-size: 13px;
+    margin: 14px 0 0;
+    color: var(--secondary);
   }
 </style>
 
