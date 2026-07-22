@@ -1,5 +1,50 @@
 {{- define "main" }}
 
+{{/* ========== 記事内のYouTube動画IDを抽出（構造化データとCTAで共用） ========== */}}
+{{- $ytID := "" }}
+{{- $raw := .RawContent }}
+{{/* ショートコード {{< youtube VIDEO_ID >}} 形式 */}}
+{{- $m1 := findRE `youtube\s+([a-zA-Z0-9_-]{11})` $raw 1 }}
+{{- if $m1 }}
+  {{- $ytID = replaceRE `youtube\s+` "" (index $m1 0) }}
+  {{- $ytID = trim $ytID " \t\n\r>\"'" }}
+{{- end }}
+{{/* youtube.com/watch?v= 形式のフォールバック */}}
+{{- if not $ytID }}
+  {{- $m2 := findRE `youtube\.com/watch\?v=[a-zA-Z0-9_-]{11}` $raw 1 }}
+  {{- if $m2 }}
+    {{- $ytID = replaceRE `.*youtube\.com/watch\?v=` "" (index $m2 0) }}
+    {{- $ytID = index (split $ytID "&") 0 }}
+  {{- end }}
+{{- end }}
+
+{{/* ========== 動画の構造化データ（VideoObject） ========== */}}
+{{/* 埋め込み動画をGoogleに認識させ、検索結果に動画リッチリザルト（サムネ付き）として表示させる狙い */}}
+{{/* 未実装だったため動画63件がインデックス未登録・登録済み0件だった（2026-07-22 Search Console調べ） */}}
+{{- if $ytID }}
+  {{/* 説明文はfrontmatterのdescriptionを優先し、なければ本文サマリーで代替（空だと無効なため） */}}
+  {{- $vDesc := .Description }}
+  {{- if not $vDesc }}{{ $vDesc = .Summary | plainify }}{{ end }}
+  {{- $videoSchema := dict
+      "@context" "https://schema.org"
+      "@type" "VideoObject"
+      "name" .Title
+      "description" ($vDesc | plainify | truncate 300)
+      "thumbnailUrl" (slice
+        (printf "https://i.ytimg.com/vi/%s/maxresdefault.jpg" $ytID)
+        (printf "https://i.ytimg.com/vi/%s/hqdefault.jpg" $ytID))
+      "uploadDate" (.Date.Format "2006-01-02T15:04:05-07:00")
+      "embedUrl" (printf "https://www.youtube.com/embed/%s" $ytID)
+      "contentUrl" (printf "https://www.youtube.com/watch?v=%s" $ytID)
+      "publisher" (dict
+        "@type" "Organization"
+        "name" site.Title
+        "url" site.Home.Permalink)
+  }}
+{{/* script内はJSコンテキストのため safeJS を使う（safeHTMLだとJSON文字列として二重エンコードされGoogleが読めない） */}}
+<script type="application/ld+json">{{ $videoSchema | jsonify | safeJS }}</script>
+{{- end }}
+
 <article class="post-single">
   <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
@@ -43,23 +88,7 @@
   {{- end }}
 
   {{/* ========== YouTubeチャンネル送客CTA（全記事共通・YouTube収益への導線） ========== */}}
-  {{/* 記事本文からYouTube動画IDを自動抽出。動画があれば「動画を見る」ボタンを追加表示し、全記事に登録ボタンを出す */}}
-  {{- $ytID := "" }}
-  {{- $raw := .RawContent }}
-  {{/* ショートコード {{< youtube VIDEO_ID >}} 形式 */}}
-  {{- $m1 := findRE `youtube\s+([a-zA-Z0-9_-]{11})` $raw 1 }}
-  {{- if $m1 }}
-    {{- $ytID = replaceRE `youtube\s+` "" (index $m1 0) }}
-    {{- $ytID = trim $ytID " \t\n\r>\"'" }}
-  {{- end }}
-  {{/* youtube.com/watch?v= 形式のフォールバック */}}
-  {{- if not $ytID }}
-    {{- $m2 := findRE `youtube\.com/watch\?v=[a-zA-Z0-9_-]{11}` $raw 1 }}
-    {{- if $m2 }}
-      {{- $ytID = replaceRE `.*youtube\.com/watch\?v=` "" (index $m2 0) }}
-      {{- $ytID = index (split $ytID "&") 0 }}
-    {{- end }}
-  {{- end }}
+  {{/* 動画IDは冒頭で抽出済みの $ytID を再利用。動画があれば「動画を見る」ボタンを追加表示し、全記事に登録ボタンを出す */}}
   {{- $channelSubURL := "https://www.youtube.com/channel/UCYWCN7cGlFIm78PxxoEk-ig?sub_confirmation=1" }}
   <div class="yt-cta">
     {{- if $ytID }}
