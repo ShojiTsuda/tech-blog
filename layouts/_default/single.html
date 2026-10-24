@@ -109,10 +109,11 @@
   {{/* 動画IDは冒頭で抽出済みの $ytID を再利用。動画があれば「動画を見る」ボタンを追加表示し、全記事に登録ボタンを出す */}}
   {{- $channelSubURL := "https://www.youtube.com/channel/UCYWCN7cGlFIm78PxxoEk-ig?sub_confirmation=1" }}
   <div class="yt-cta">
+    {{/* 動画にも登場する「ちょこ博士」が案内する（動画の有無でセリフを変える） */}}
     {{- if $ytID }}
-    <p class="yt-cta-lead">▶ この記事の内容は動画でも楽しめます</p>
+    {{ partial "chara_bubble.html" (dict "img" "hakase-talk" "text" "この話は動画でも解説しているよ。よかったら見てね！" "class" "chara-cta") }}
     {{- else }}
-    <p class="yt-cta-lead">🎬 YouTube「ちょこっといい雑学」も配信中</p>
+    {{ partial "chara_bubble.html" (dict "img" "hakase-talk" "text" "YouTube「ちょこっといい雑学」でも、雑学を紹介しているよ！" "class" "chara-cta") }}
     {{- end }}
     <div class="yt-cta-btns">
       {{- if $ytID }}
@@ -144,6 +145,7 @@
   {{- with $related }}
   <div class="related-posts">
     <h2 class="related-posts-title">📚 関連記事</h2>
+    {{ partial "chara_bubble.html" (dict "img" "hakase-point" "text" "こちらの記事もおすすめだよ" "class" "chara-related") }}
     <div class="related-posts-grid">
       {{- range . }}
       <a class="related-card" href="{{ .Permalink }}">

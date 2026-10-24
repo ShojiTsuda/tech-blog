@@ -1,0 +1,24 @@
+{{- /* ========== ちょこ博士（吹き出しつき）の共通部品 ==========
+     YouTubeにも登場するブログの顔「ちょこ博士」を表示する。
+     使い方: {{ partial "chara_bubble.html" (dict "img" "hakase-main" "text" "セリフ" "class" "追加クラス" "eager" true) }}
+       img   : static/images/chara/ にある画像名（拡張子なし）
+       text  : 吹き出しのセリフ（口調はやさしい先生「〜だよ」）
+       class : 置き場所ごとの見た目調整用クラス（任意）
+       eager : 画面の最初に見える場所なら true（遅延読み込みしない）
+     画像の縦横比をあらかじめ指定し、読み込み時のレイアウトのズレ(CLS)を防ぐ。
+========================================================= */ -}}
+{{- $sizes := dict
+    "hakase-main"  (slice 320 369)
+    "hakase-talk"  (slice 320 369)
+    "hakase-point" (slice 320 354)
+    "hakase-think" (slice 320 369) }}
+{{- $wh := index $sizes .img | default (slice 320 369) }}
+<div class="chara-bubble {{ .class }}">
+  <img class="chara-img"
+       src="{{ printf "/images/chara/%s.webp" .img | relURL }}"
+       alt="ちょこ博士"
+       width="{{ index $wh 0 }}" height="{{ index $wh 1 }}"
+       {{- if .eager }} fetchpriority="high"{{ else }} loading="lazy"{{ end }}
+       decoding="async">
+  <p class="chara-say">{{ .text }}</p>
+</div>

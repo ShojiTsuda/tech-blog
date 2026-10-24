@@ -1,0 +1,15 @@
+{{- define "main" }}
+{{/* ========== ページが見つからない時（404） ==========
+     テーマ標準は「404」と大きく出るだけで行き止まりになるため、
+     考え中の「ちょこ博士」が案内し、トップ・記事一覧・検索へ戻れるようにする。
+================================================= */}}
+<div class="notfound-wrap">
+  <p class="notfound-code">404</p>
+  {{ partial "chara_bubble.html" (dict "img" "hakase-think" "text" "あれれ…このページは見つからないみたい。下のボタンから探してみてね" "class" "chara-404" "eager" true) }}
+  <div class="notfound-links">
+    <a class="notfound-btn" href="{{ "/" | relURL }}">🏠 トップへ</a>
+    <a class="notfound-btn" href="{{ "/posts/" | relURL }}">📚 記事一覧</a>
+    <a class="notfound-btn" href="{{ "/search/" | relURL }}">🔍 記事を検索</a>
+  </div>
+</div>
+{{- end }}{{/* end main */ -}}

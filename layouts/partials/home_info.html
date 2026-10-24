@@ -17,6 +17,8 @@
             <button type="submit" class="home-search-btn">検索</button>
         </div>
     </form>
+    {{/* ブログの顔「ちょこ博士」が出迎える */}}
+    {{ partial "chara_bubble.html" (dict "img" "hakase-main" "text" "ようこそ！ちょこっと賢くなれる雑学を紹介しているよ" "class" "chara-home" "eager" true) }}
     <footer class="entry-footer">
         {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
     </footer>
