@@ -24,11 +24,13 @@ ShowToc = true
 DateFormat = "2006年1月2日"
 
 [params.assets]
-favicon = "/favicon.svg"
-favicon16x16 = "/favicon.svg"
-favicon32x32 = "/favicon.svg"
-apple_touch_icon = "/favicon.svg"
-safari_pinned_tab = "/favicon.svg"
+# アイコン類はYouTubeのチャンネルアイコン（博士ブタ入り）から作成
+favicon = "/favicon.ico"
+favicon16x16 = "/favicon-16x16.png"
+favicon32x32 = "/favicon-32x32.png"
+apple_touch_icon = "/apple-touch-icon.png"
+# Safariのピン留め用（今のSafariは使わない項目。存在しないファイルを指さないよう32pxを指定）
+safari_pinned_tab = "/favicon-32x32.png"
 # 構造化データ（JSON-LD）の発行元ロゴ用画像（タブのfaviconとは別）
 logo = "/images/logo.png"
 
