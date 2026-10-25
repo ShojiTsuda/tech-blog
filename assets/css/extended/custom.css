@@ -1075,12 +1075,16 @@ a.tag:hover {
 .chara-home .chara-img {
   width: 84px;
 }
+/* トップの吹き出しは中央ぞろえ（左寄せだと、行が短い分だけ右側が空いて見える） */
+.chara-home .chara-say {
+  text-align: center;
+}
 /* PC（幅1024px以上）：博士を見出しバナーの右側に大きく置く。
    これより狭い画面で右に置くと見出しの文字が窮屈になるため、
    その場合は検索欄の下に横並びで表示する（上の基本スタイル） */
 @media (min-width: 1024px) {
   .home-info {
-    padding-right: 400px !important;
+    padding-right: 430px !important;
     min-height: 240px !important;
   }
   .chara-home {
@@ -1088,15 +1092,20 @@ a.tag:hover {
     right: 24px;
     top: 50%;
     transform: translateY(-50%);
-    width: 370px;
+    width: 392px;
     margin-top: 0;
   }
   .chara-home .chara-img {
     width: 136px;
   }
+  /* 吹き出しの中いっぱいに文字が届くようにする：
+     ①文字を大きく ②枠の幅を一番長い行（「ようこそ！ちょこっと」＝10文字）にぴったり合わせる
+     （行の両端をそろえる方式は、行ごとに文字の間隔がまちまちになり不格好だったため中央ぞろえにした） */
   .chara-home .chara-say {
-    font-size: 1.02rem;
+    font-size: 1.2rem;
     padding: 0.8rem 1.05rem;
+    flex: none;
+    width: calc(10.4em + 2.1rem + 4px); /* 10文字分＋少しの余裕＋左右の余白＋枠線 */
   }
 }
 
