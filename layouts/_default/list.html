@@ -34,7 +34,9 @@
 {{- if eq .Data.Plural "categories" }}
 {{ partial "chara_bubble.html" (dict "img" "hakase-happy" "text" (printf "「%s」の話を集めたよ。ゆっくり読んでいってね！" .Title) "class" "chara-page" "eager" true) }}
 {{- else }}
-{{ partial "chara_bubble.html" (dict "img" "hakase-main" "text" (printf "「%s」のタグがついた記事だよ。気になる話はあるかな？" .Title) "class" "chara-page" "eager" true) }}
+{{/* メニューの表示名が「雑学・豆知識」のタグは、メニューと同じ呼び名で案内する（ページの実体は「雑学」タグ） */}}
+{{- $tagLabel := index (dict "雑学" "雑学・豆知識") .Title | default .Title }}
+{{ partial "chara_bubble.html" (dict "img" "hakase-main" "text" (printf "「%s」のタグがついた記事だよ。気になる話はあるかな？" $tagLabel) "class" "chara-page" "eager" true) }}
 {{- end }}
 {{- end }}
 {{- end }}
