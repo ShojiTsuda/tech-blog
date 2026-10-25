@@ -5,6 +5,13 @@
   <h1 class="page-title">{{ .Title }}</h1>
 </header>
 
+{{/* ちょこ博士が案内する（1ページ目は記事数、2ページ目以降はページ番号） */}}
+{{- if eq .Paginator.PageNumber 1 }}
+{{ partial "chara_bubble.html" (dict "img" "hakase-point" "text" (printf "全%d本の雑学が読めるよ。気になる記事を探してみてね！" .Paginator.TotalNumberOfElements) "class" "chara-page" "eager" true) }}
+{{- else }}
+{{ partial "chara_bubble.html" (dict "img" "hakase-talk" "text" (printf "%dページ目だよ。気になる記事は見つかったかな？" .Paginator.PageNumber) "class" "chara-page" "eager" true) }}
+{{- end }}
+
 {{/* 検索バー */}}
 <form class="list-search-form" action="/search/" method="get" onsubmit="return homeSearchSubmit(this)" style="margin-bottom:1.5rem;">
   <div class="home-search-inner">

@@ -34,6 +34,11 @@
 {{- partial "home_info.html" . }}
 {{- end }}
 
+{{/* 2ページ目以降は見出しバナーが無いので、博士が続きの案内をする */}}
+{{- if and .IsHome (gt $paginator.PageNumber 1) }}
+{{ partial "chara_bubble.html" (dict "img" "hakase-talk" "text" (printf "%dページ目だよ。続きの雑学も楽しんでいってね！" $paginator.PageNumber) "class" "chara-page" "eager" true) }}
+{{- end }}
+
 {{- $term := .Data.Term }}
 {{- range $index, $page := $paginator.Pages }}
 

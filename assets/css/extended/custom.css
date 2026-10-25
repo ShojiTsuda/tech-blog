@@ -1128,6 +1128,28 @@ a.tag:hover {
   padding: 0.45rem 0.8rem;
 }
 
+/* ---- ⑤ 一覧・カテゴリー・タグ・検索などのページ上部の案内 ----
+   見出しの下に、博士（右）と吹き出し（左）を置く。博士は右側が基本 */
+.chara-page {
+  margin: 0.2rem 0 1.4rem;
+}
+.chara-page .chara-img {
+  width: 84px;
+}
+/* PC・タブレット幅：博士も吹き出しの文字も大きくして読みやすくする */
+@media (min-width: 768px) {
+  .chara-page {
+    margin: 0.4rem 0 1.8rem;
+  }
+  .chara-page .chara-img {
+    width: 116px;
+  }
+  .chara-page .chara-say {
+    font-size: 1.05rem;
+    padding: 0.8rem 1.1rem;
+  }
+}
+
 /* ---- ④ ページが見つからない時（404） ---- */
 .notfound-wrap {
   text-align: center;
@@ -1180,5 +1202,8 @@ a.tag:hover {
   .chara-cta .chara-img,
   .chara-404 .chara-img {
     width: 76px;
+  }
+  .chara-page .chara-img {
+    width: 68px;
   }
 }
