@@ -105,6 +105,26 @@
   </div>
   {{- end }}
 
+  {{/* ========== 参考資料（frontmatter の sources があるときだけ表示） ==========
+       sources が無い記事では何も出力しない（既存記事の表示は変わらない）。
+       各項目: title / url / publisher / accessed（最終閲覧日）。本文の転載はせず、タイトルとリンクのみ。 */}}
+  {{- with .Params.sources }}
+  <section class="post-sources">
+    <h2 class="post-sources-title">参考資料</h2>
+    <ul class="post-sources-list">
+      {{- range . }}
+      {{- if and .title .url }}
+      <li>
+        <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+        {{- with .publisher }}<span class="post-sources-meta">／{{ . }}</span>{{ end }}
+        {{- with .accessed }}<span class="post-sources-meta">（{{ (time.AsTime .).Format "2006年1月2日" }}閲覧）</span>{{ end }}
+      </li>
+      {{- end }}
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
   {{/* ========== YouTubeチャンネル送客CTA（全記事共通・YouTube収益への導線） ========== */}}
   {{/* 動画IDは冒頭で抽出済みの $ytID を再利用。動画があれば「動画を見る」ボタンを追加表示し、全記事に登録ボタンを出す */}}
   {{- $channelSubURL := "https://www.youtube.com/channel/UCYWCN7cGlFIm78PxxoEk-ig?sub_confirmation=1" }}
@@ -234,6 +254,28 @@
   .related-card:hover .related-card-title {
     color: var(--accent-orange);
   }
+
+  /* ========== 参考資料（sources があるときだけ表示） ========== */
+  .post-sources {
+    margin-top: 40px;
+    padding: 16px 18px;
+    border-radius: var(--radius);
+    background: var(--entry);
+    border: 1px solid var(--border);
+  }
+  .post-sources-title {
+    font-size: 17px;
+    margin: 0 0 10px;
+  }
+  .post-sources-list {
+    margin: 0;
+    padding-left: 1.2em;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .post-sources-list li { margin: 4px 0; }
+  .post-sources-list a { text-decoration: underline; word-break: break-all; }
+  .post-sources-meta { color: var(--secondary); font-size: 13px; }
 
   /* ========== YouTubeチャンネル送客CTA ========== */
   .yt-cta {
